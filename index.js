@@ -5,7 +5,12 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const cors = require('cors')
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://aienglishtutor.netlify.app', // Allow Netlify domain
+    methods: ['GET', 'POST'], // Add other methods as required
+    credentials: true // If you are using cookies or authorization headers
+  }));
+
 // Set up Google Generative AI
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
